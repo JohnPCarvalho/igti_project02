@@ -7,22 +7,35 @@ const fetchUsers = async () => {
 window.addEventListener('load', async () => {
   activateInput();
   let usersList = await fetchUsers();
-
+  console.log(usersList);
+  let mappedUsers = mapUsers(usersList);
+  console.log(mappedUsers);
   activateInput();
-  filterUsers(usersList);
+  
+  //filterUsers(mappedUsers);
 });
 
 let userInput = document.querySelector("#userInput");
 let form = document.querySelector("form");
 
-const filterUsers = (list) => {
-  console.log(list);
+
+const mapUsers = (usersList) => {
+  return usersList.map(user => 
+    ({
+      name: user.name.first,
+      email: user.email
+    })
+  )
+}
+
+const filterUsers = (usersList) => {
+  console.log(usersList);
 
   //function filterName(arrayList) {
  //   return arrayList.name.first.charAt(0) == 'B';
  // }
 
-  let filteredList = list.filter((names) => {
+  let filteredList = usersList.filter((names) => {
     return names.name.first.charAt(0) == 'A';
   });
   console.log(filteredList);
