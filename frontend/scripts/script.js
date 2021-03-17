@@ -1,37 +1,33 @@
-const fetchUsers = async () => {
+let arrayOfUsers = [];
+
+async function fetchUsers () {
   let resource = await fetch("http://localhost:3001/users");
   let users = await resource.json();
-  return users;
+  arrayOfUsers = users.map(user => 
+      ({
+        name: user.name.first,
+        picture: user.picture.thumbnail,
+        dob: user.dob.date,
+        email: user.email
+      })
+    );
+    return arrayOfUsers;
 }
 
-let userInput = document.querySelector("#userInput");
-let form = document.querySelector("form");
-
-function mapUsers (usersList)  {
-  return usersList.map(user => 
-    ({
-      name: user.name.first,
-      picture: user.picture.thumbnail,
-      dob: user.dob.date,
-      email: user.email
-    })
-  )
+function search () {
+  //captures user input
+  userInput.addEventListener('keyup', (event) => {
+    if (event.key === 'Enter') {
+      console.log(arrayOfUsers);
+      arrayOfUsers.filter((user) => {
+        return user.name.toLowerCase().includes(event.target.value).toLowerCase();
+      })
+    }
+  })
 }
 
-const filterUsers = (usersList) => {
-  console.log(usersList);
-
-  let filteredList = usersList.filter((names) => {
-    return names.name.first.charAt(0) == 'A';
-  });
-  console.log(filteredList);
-}
-
-window.addEventListener('load', async () => {
+window.addEventListener('load', () => {
   
-  let usersList = await fetchUsers();
-  let mappedUsers = mapUsers(usersList);
-  console.log(mappedUsers);
-
-  
+  fetchUsers();
+  search();
 });
