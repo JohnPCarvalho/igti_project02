@@ -23,6 +23,8 @@ const mapUsers = (usersList) => {
   return usersList.map(user => 
     ({
       name: user.name.first,
+      picture: user.picture.thumbnail,
+      dob: user.dob.date,
       email: user.email
     })
   )
@@ -46,4 +48,3 @@ const activateInput = () => {
     console.log('logou');
   });
 }
-
