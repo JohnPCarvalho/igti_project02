@@ -1,12 +1,10 @@
 let arrayOfUsers = [];
 let filtered = [];
 
-let panelFilter = document.querySelector("#panelFilter");
-
-let panelStatistics = document.querySelector("#panelStatistics");
-
-
 let userInput = document.querySelector("#userInput");
+
+let panelFilter = document.querySelector("#panelFilter");
+let panelStatistics = document.querySelector("#panelStatistics");
 
 async function fetchUsers () {
   let resource = await fetch("http://localhost:3001/users");
@@ -33,20 +31,6 @@ function clearInput () {
 }
 
 function render() { 
-  if (userInput.value === '') {
-    let emptyBox;
-    if (emptyBox === null) {
-      emptyBox = document.createElement('h1');
-      emptyBox.innerText = 'No filtered users.'
-      panelFilter.appendChild(emptyBox);
-    } else {
-      panelFilter.prepend(emptyBox);
-    }
-  } else {
-    let fullBox = document.createElement('h2')
-    fullBox.innerText = 'there are filtered users.'
-    panelFilter.appendChild(fullBox);
-  }
 }
 
 window.addEventListener('load', () => {
@@ -59,11 +43,13 @@ window.addEventListener('load', () => {
     if (event.key === "Enter") {
       console.log('Enter');
       search(userInput.value);
-      render();
+      console.log(filtered);
       clearInput();
     }
     else {
       console.log('else aqui');
     }
-  })
+  });
+
+
 });
