@@ -1,5 +1,6 @@
 let arrayOfUsers = [];
 let filtered = [];
+let secretMessage = 'Fleetwood Mac are the best';
 
 let userInput = document.querySelector("#userInput");
 
@@ -30,26 +31,45 @@ function clearInput () {
   userInput.value = '';
 }
 
-function render() { 
+function renderPanels() { 
+  if (userInput.value !== '') {
+    panelFilter.innerText = 'Oia so';
+    panelStatistics.innerText = 'Oia so';
+    panelFilter.innerHTML = renderFilteredUsers();
+    //renderizar as infos de painel x estatistica
+  }
+  else {
+    //zerar as infos dos paineis - it is already done.
+    panelFilter.innerText = 'Nenhum conteudo a ser exibido';
+    panelStatistics.innerText = 'Nada a ser exibido';
+  }
+}
+
+function renderFilteredUsers() {
+  return (
+  `
+  <div>
+    <h1>Yahoooooo ${secretMessage}</h1>
+  </div>
+  `
+  );
 }
 
 window.addEventListener('load', () => {
   fetchUsers();
   userInput.focus();
 
-  render();
-
   userInput.addEventListener('keyup', (event) => {
     if (event.key === "Enter") {
       console.log('Enter');
       search(userInput.value);
       console.log(filtered);
+      renderPanels();
       clearInput();
     }
     else {
       console.log('else aqui');
     }
   });
-
 
 });
