@@ -1,6 +1,6 @@
 let arrayOfUsers = [];
 let filtered = [];
-let secretMessage = 'Fleetwood Mac are the best';
+let numberOfUsers = 3;
 
 let userInput = document.querySelector("#userInput");
 
@@ -14,6 +14,7 @@ async function fetchUsers () {
       ({
         name: user.name.first + ' ' + user.name.last,
         picture: user.picture.thumbnail,
+        gender: user.gender,
         dob: user.dob.date,
         age: user.dob.age
       })
@@ -37,6 +38,7 @@ function renderPanels() {
     panelStatistics.innerText = 'Oia so';
     panelFilter.innerHTML = renderFilteredUsers();
     //renderizar as infos de painel x estatistica
+    panelStatistics.innerHTML = renderFilteredStatistics();
   }
   else {
     //zerar as infos dos paineis - it is already done.
@@ -49,10 +51,41 @@ function renderFilteredUsers() {
   return (
   `
   <div>
-    <h1>Yahoooooo ${secretMessage}</h1>
+    <h1 class="font-sans text-4xl">${filtered.length} usuario(s) encontrado(s)</h1>
+    <ul>
+      ${filtered.map((user) => {
+        return (
+          `
+            <li> 
+              <img class="rounded-full inline-block" src="${user.picture}"> ${user.name}, ${user.age} anos
+            </li>
+          `
+        )
+      }).join('')}
+    </ul>
   </div>
   `
-  );
+  )
+}
+
+function doReduce(filteredArray) {
+  return filteredArray.reduce()
+}
+
+function renderFilteredStatistics () {
+  return (
+    `
+    <div>
+      <h1 class="font-sans text-4xl">Estatisticas</h1>
+      <ul>
+        <li>Sexo Masculino: ${filtered.filter(user => user.gender == 'male').length} </li>
+        <li>Sexo Feminino: ${filtered.filter(user => user.gender == 'female').length} </li>
+        <li>Soma das idades: ${doReduce(filtered)} </li>
+        <li>Media das idades:  </li>
+      </ul>
+    </div>
+    `
+  )
 }
 
 window.addEventListener('load', () => {
