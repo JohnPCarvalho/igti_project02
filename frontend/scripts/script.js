@@ -69,7 +69,7 @@ function renderFilteredUsers() {
 }
 
 function doReduce(filteredArray) {
-  return filteredArray.reduce()
+  return filteredArray.map(obj => obj.age).reduce((result, age) => result += age )
 }
 
 function renderFilteredStatistics () {
@@ -80,8 +80,8 @@ function renderFilteredStatistics () {
       <ul>
         <li>Sexo Masculino: ${filtered.filter(user => user.gender == 'male').length} </li>
         <li>Sexo Feminino: ${filtered.filter(user => user.gender == 'female').length} </li>
-        <li>Soma das idades: ${doReduce(filtered)} </li>
-        <li>Media das idades:  </li>
+        <li>Soma das idades:  ${doReduce(filtered)}</li>
+        <li>Media das idades: ${(doReduce(filtered) / filtered.length).toFixed(2)} </li>
       </ul>
     </div>
     `
