@@ -10,23 +10,23 @@
 
   <title>Document</title>
 </head>
-<body>
+<body class="bg-gray-200">
   <div>
     <h1 class="font-sans text-6xl text-center">Pesquisa de usuarios</h1>
   </div>
 
-  <div id="formDiv" class="flex justify-center">
-      <input class="border-4 rounded-md border-green-200" type="text" id="userInput">
-      <button type="button" id="searchButton" class="w-28 h-8 border-2 bg-green-500 text-white">Search</button>
+  <div id="formDiv" class="flex justify-center m-4  ">
+      <input class="w-64 h-10 border-4 rounded-md border-green-200 m-2" type="text" id="userInput">
+      <button type="button" id="searchButton" class="w-28 h-10 border-2 rounded-md bg-green-500 text-white m-2">Search</button>
   </div>
 
-  <div id="panelsDiv" class="flex justify-center p-5 space-x-3">
+  <div id="panelsDiv" class="flex justify-center p-8 space-x-3">
 
-    <div id="panelFilter" class=" flex-auto h-auto w-48 h-28 border-2">
+    <div id="panelFilter" class="flex-auto h-auto w-48 h-28 border-2 border-gray-300 rounded-md p-2">
      <h1 class="font-sans text-4xl"> Nada a ser exibido </h1>  
     </div>
   
-    <div id="panelStatistics" class="flex-auto w-48 h-36 border-2">
+    <div id="panelStatistics" class="flex-auto w-48 border-2 border-gray-300 rounded-md p-2">
       <h1 class="font-sans text-4xl">Nenhuma estatistica a ser exibida</h1> 
     </div>
 

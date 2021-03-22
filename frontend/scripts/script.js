@@ -3,6 +3,7 @@ let filtered = [];
 let numberOfUsers = 3;
 
 let userInput = document.querySelector("#userInput");
+let searchButton = document.querySelector("#searchButton");
 
 let panelFilter = document.querySelector("#panelFilter");
 let panelStatistics = document.querySelector("#panelStatistics");
@@ -34,16 +35,13 @@ function clearInput () {
 
 function renderPanels() { 
   if (userInput.value !== '') {
-    panelFilter.innerText = 'Oia so';
-    panelStatistics.innerText = 'Oia so';
     panelFilter.innerHTML = renderFilteredUsers();
-    //renderizar as infos de painel x estatistica
     panelStatistics.innerHTML = renderFilteredStatistics();
   }
   else {
     //zerar as infos dos paineis - it is already done.
-    panelFilter.innerText = 'Nenhum conteudo a ser exibido';
-    panelStatistics.innerText = 'Nada a ser exibido';
+    panelFilter.innerHTML = '<h1 class="font-sans text-4xl">Nenhum conteudo a ser exibido</h1>';
+    panelStatistics.innerHTML = '<h1 class="font-sans text-4xl">Nenhum conteudo a ser exibido</h1>';
   }
 }
 
@@ -51,13 +49,13 @@ function renderFilteredUsers() {
   return (
   `
   <div>
-    <h1 class="font-sans text-4xl">${filtered.length} usuario(s) encontrado(s)</h1>
+    <h1 class="font-sans text-4xl m-4">${filtered.length} usuario(s) encontrado(s)</h1>
     <ul>
       ${filtered.map((user) => {
         return (
           `
-            <li> 
-              <img class="rounded-full inline-block" src="${user.picture}"> ${user.name}, ${user.age} anos
+            <li class="m-4"> 
+              <p><img class="rounded-full inline-block" src="${user.picture}"> ${user.name}, ${user.age} anos</p>
             </li>
           `
         )
@@ -69,6 +67,7 @@ function renderFilteredUsers() {
 }
 
 function doReduce(filteredArray) {
+  //obj.age cria a array. Eu errava porque criava um objeto com ({})
   return filteredArray.map(obj => obj.age).reduce((result, age) => result += age )
 }
 
@@ -76,12 +75,12 @@ function renderFilteredStatistics () {
   return (
     `
     <div>
-      <h1 class="font-sans text-4xl">Estatisticas</h1>
+      <h1 class="font-sans text-4xl m-4">Estatisticas</h1>
       <ul>
-        <li>Sexo Masculino: ${filtered.filter(user => user.gender == 'male').length} </li>
-        <li>Sexo Feminino: ${filtered.filter(user => user.gender == 'female').length} </li>
-        <li>Soma das idades:  ${doReduce(filtered)}</li>
-        <li>Media das idades: ${(doReduce(filtered) / filtered.length).toFixed(2)} </li>
+        <li class="ml-4">Sexo Masculino: ${filtered.filter(user => user.gender == 'male').length} </li>
+        <li class="ml-4">Sexo Feminino: ${filtered.filter(user => user.gender == 'female').length} </li>
+        <li class="ml-4">Soma das idades:  ${doReduce(filtered)}</li>
+        <li class="ml-4">Media das idades: ${(doReduce(filtered) / filtered.length).toFixed(2)} </li>
       </ul>
     </div>
     `
@@ -104,5 +103,11 @@ window.addEventListener('load', () => {
       console.log('else aqui');
     }
   });
+
+  searchButton.addEventListener("click", (event) => {
+    search(userInput.value);
+    renderPanels();
+    clearInput()
+  })
 
 });
